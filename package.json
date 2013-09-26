@@ -1,0 +1,11 @@
+{
+  "name": "jquery.price-autocomplete",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-csslint": "*",
+    "grunt-contrib-cssmin": "*"
+  }
+}
