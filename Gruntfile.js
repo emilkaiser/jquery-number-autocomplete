@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       },
       my_target: {
         files: {
-          'dist/jquery.price-autocomplete.js': ['src/jquery.price-autocomplete.js']
+          'dist/jquery.number-autocomplete.js': ['src/jquery.number-autocomplete.js']
         }
       }
     },
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
         },
         files: {
-          'dist/jquery.price-autocomplete.css': ['src/jquery.price-autocomplete.css']
+          'dist/jquery.number-autocomplete.css': ['src/jquery.number-autocomplete.css']
         }
       }
     }

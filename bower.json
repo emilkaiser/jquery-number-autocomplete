@@ -1,7 +1,7 @@
 {
-  "name": "jquery.price.autocomplete",
+  "name": "jquery.number.autocomplete",
   "version": "0.1.0",
-  "homepage": "https://github.com/emilkaiser/jquery-price-autocomplete",
+  "homepage": "https://github.com/emilkaiser/jquery-number-autocomplete",
   "authors": [
     "Emil Kaiser <emilkaiser@gmail.com>"
   ],

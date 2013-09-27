@@ -1,4 +1,4 @@
-.priceAutocomplete {
+.numberAutocomplete {
   border: 2px solid #C4C4C4;
   background-color: #FFF;
   color: #033;
@@ -7,13 +7,13 @@
   padding: 0;
   position: absolute;
 }
-.priceAutocomplete li {
+.numberAutocomplete li {
   text-align: left;
   font-size: 9pt;
   display: block;
   padding: 2px 0 2px 2px;
   cursor: pointer;
 }
-.priceAutocomplete .selected {
+.numberAutocomplete .selected {
   background-color: #cddcf3;
 }
