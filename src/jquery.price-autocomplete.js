@@ -17,7 +17,9 @@ defaults = {
   formatterOptions: null,
   className: pluginName,
   prefix: '',
-  suffix: ' kr'
+  suffix: ' kr',
+  unmaskInput: false,
+  removeFixInput: false
 };
 
 function PriceAutocomplete (element, options) {
@@ -57,7 +59,7 @@ PriceAutocomplete.prototype = {
       switch (getCharCode(event)) {
         case 13:
           event.preventDefault();
-          this.click();
+          this.mousedown();
           break;
         case 40:
           event.preventDefault();
@@ -96,9 +98,15 @@ PriceAutocomplete.prototype = {
     },
     mousedown: function () {
       this.setValue(this.$autocomplete.find('.selected').html());
+      this.blur();
     },
     setValue: function (val) {
-      val = val.replace(this.options.suffix, '');
+      if (this.options.removeFixInput) {
+        val = val.replace(this.options.prefix, '').replace(this.options.suffix, '');
+      }
+      if (this.options.unmaskInput) {
+        val = unmask(val);
+      }
       this.$element.val(val);
     },
     walk: function (inc) {
@@ -115,7 +123,7 @@ PriceAutocomplete.prototype = {
       this.$autocomplete.off().remove();
     },
     format: function (val, fix) {
-      val = val.toString().replace(/[^\d]/g, '');
+      val = unmask(val);
       if (this.options.formatter) {
         val = this.options.formatter(val, this.options.formatterOptions);
       }
@@ -134,6 +142,10 @@ $.fn[pluginName] = function (options) {
   });
 };
 
+function unmask (val) {
+  return val.toString().replace(/[^\d]/g, '');
+}
+
 function getCharCode (event) {
   return parseInt((typeof event.which == 'number') ? event.which : event.keyCode, 10);
 }
@@ -149,7 +161,7 @@ function getNextValue (value) {
 }
 
 function getValues (value) {
-  var strValue = value.toString().replace(/[^\d]/g, ''),
+  var strValue = unmask(value),
   intValue = parseInt(strValue, 10),
   values = [];
   if (!isNaN(intValue)) {
