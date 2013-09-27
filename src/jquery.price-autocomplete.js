@@ -19,7 +19,9 @@ defaults = {
   prefix: '',
   suffix: ' kr',
   unmaskInput: false,
-  removeFixInput: false
+  removeFixInput: false,
+  minDigits: 4,
+  maxDigits: 8
 };
 
 function PriceAutocomplete (element, options) {
@@ -80,7 +82,7 @@ PriceAutocomplete.prototype = {
       }
       this.setValue(this.format(this.$element.val()));
       var html = '';
-      $.each(getValues(this.$element.val()), $.proxy(function (i, val) {
+      $.each(getValues(this.$element.val(), this.options.minDigits, this.options.maxDigits), $.proxy(function (i, val) {
         html += '<li>' + this.format(val, true) + '</li>';
       }, this));
       if (html !== '') {
@@ -150,17 +152,17 @@ function getCharCode (event) {
   return parseInt((typeof event.which == 'number') ? event.which : event.keyCode, 10);
 }
 
-function getNextValue (value) {
+function getNextValue (value, min, max) {
   var nextValue = value + '0';
-  if(value.length < 4) {
-    return getNextValue(nextValue);
-  } else if(value.length < 8) {
+  if(value.length < min) {
+    return getNextValue(nextValue, min, max);
+  } else if(value.length < max) {
     return nextValue;
   }
   return null;
 }
 
-function getValues (value) {
+function getValues (value, min, max) {
   var strValue = unmask(value),
   intValue = parseInt(strValue, 10),
   values = [];
@@ -169,10 +171,10 @@ function getValues (value) {
       values.push(strValue);
     }
     if(intValue !== 0) {
-      var next = getNextValue(strValue);
+      var next = getNextValue(strValue, min, max);
       while(next !== null) {
         values.push(next);
-        next = getNextValue(next);
+        next = getNextValue(next, min, max);
       }
     }
   }
