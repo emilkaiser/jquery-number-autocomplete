@@ -1,6 +1,6 @@
 .numberAutocomplete {
-  border: 2px solid #C4C4C4;
-  background-color: #FFF;
+  border: 1px solid #ccc;
+  background-color: #fff;
   color: #033;
   margin: 0;
   z-index: 1337;
@@ -15,5 +15,5 @@
   cursor: pointer;
 }
 .numberAutocomplete .selected {
-  background-color: #cddcf3;
+  background-color: #f6f6f6;
 }
