@@ -17,9 +17,9 @@
     formatterOptions: null, // a object with options to be sent on to the formatter
     className: pluginName, // for styling etc
     prefix: '', // something before ..
-    suffix: ' kr', // .. and something after
+    suffix: '', // .. and something after
     unmaskInput: false, // only digits in input field or not
-    removeFixInput: true, // allow separators but no prefix or suffix in input field
+    removeFixInput: false, // allow separators but no prefix or suffix in input field
     minDigits: 4, // 1000 to ..
     maxDigits: 8, // .. 10 000 000
     positioning: true // doing some sane positioning below input field
@@ -120,7 +120,7 @@
 
     setValue: function (val) {
       if (this.options.removeFixInput) {
-        val = val.replace(this.options.prefix, '').replace(this.options.suffix, '');
+        val = val.replace(decodeHtmlEntities(this.options.prefix), '').replace(decodeHtmlEntities(this.options.suffix), '');
       }
       if (this.options.unmaskInput) {
         val = unmask(val);
@@ -159,6 +159,10 @@
   };
 
   // Private methods
+
+  function decodeHtmlEntities (val) {
+    return $('<div />').html(val).text();
+  }
 
   function unmask (val) {
     return val.toString().replace(/[^\d]/g, '');
