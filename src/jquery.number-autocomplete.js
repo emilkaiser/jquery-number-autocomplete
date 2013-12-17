@@ -83,7 +83,7 @@
     },
 
     keyup: function (event) {
-      if ([13, 40, 38, 27, 37, 39].indexOf(getCharCode(event)) !== -1) {
+      if (indexOf([13, 40, 38, 27, 37, 39], getCharCode(event)) !== -1) {
         return;
       }
       if (!this.$autocomplete) {
@@ -194,6 +194,18 @@
       }
     }
     return values;
+  }
+
+  function indexOf (array, value) {
+    if (array.indexOf) {
+      return array.indexOf(value);
+    } else if (root._ && root._.indexOf) {
+      return root._.indexOf(array, value);
+    } else if (root.jQuery) {
+      return root.jQuery.inArray(value, array);
+    } else {
+      throw new Error('Missing Array.indexOf or equivalent');
+    }
   }
 
   // The jQuery part of the plugin
