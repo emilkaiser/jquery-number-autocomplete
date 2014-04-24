@@ -16,18 +16,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    csslint: {
-      strict: {
-        src: ['src/**/*.css']
-      }
-    },
-    cssmin: {
-      combine: {
-        options: {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
-        },
+    sass: {
+      prod: {
         files: {
-          'dist/jquery.number-autocomplete.css': ['src/jquery.number-autocomplete.css']
+          'dist/jquery.number-autocomplete.css': 'src/jquery.number-autocomplete.scss'
         }
       }
     }
@@ -36,9 +28,8 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-csslint');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify', 'csslint', 'cssmin']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'sass']);
 };
