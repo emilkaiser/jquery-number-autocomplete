@@ -34,7 +34,7 @@
   NumberAutocomplete.prototype = {
 
     init: function () {
-      this.$autocomplete = $('<ul></ul>', {class: this.options.className}).hide();
+      this.$autocomplete = $('<ul></ul>', {'class': this.options.className}).hide();
       $('body').append(this.$autocomplete);
 
       this.$autocomplete.on('mousedown', 'li', $.proxy(this.mousedown, this));
